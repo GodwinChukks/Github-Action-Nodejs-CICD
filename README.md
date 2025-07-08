@@ -1,179 +1,387 @@
-# Node.js CI/CD with GitHub Actions
+# GithubAction-CICD
 
-This project demonstrates how to create a simple Node.js application with Express, serve a static web page, and set up a GitHub Actions workflow for CI/CD.
+# Introduction to Continuous Integration and Continuous Deployment
 
-## Features
-- Caching with actions/cache
-- Unit testing with Jest
-- Linting with ESLint
-- Deployment-ready (Heroku placeholder)
+### The project will involve setting up a simple web application (e.g., a Node.js application) and applying CI/CD practices using GitHub Actions. This application will have basic functionality, such as serving a static web page.
 
----
+### Introduction to GitHub Actions and CI/CD Course Project
 
-## Setup Instructions
+### Welcome to our course on GitHub Actions and Continuous Integration/Continuous Deployment (CI/CD). This course is designed to provide a hands-on learning experience, guiding you through the essentials of automating software development processes using GitHub Actions. Whether you're a developer, a student, or just curious about CI/CD practices, this course will equip you with the practical skills and knowledge you need to implement these powerful automation techniques in your projects.
 
-### 1. Clone and install
-```bash
-git clone https://github.com/YOUR_USERNAME/node-app-ci-cd.git
-cd node-app-ci-cd
-npm install
+## Why is this relevant to learners
+
+### Imagine you're a chef in a busy restaurant. Every dish you prepare is like a piece of software code. Without a systematic approach, you might end up with orders being mixed up, dishes taking too long to prepare, or worse, the quality of the food being inconsistent.
+
+### This is where a well-organized kitchen, with clear processes and automation (like having appliances that precisely time and cook parts of the dishes), comes into play.
+
+### In software development, CI/CD is akin to this efficient kitchen. It ensures that your "dishes" (software builds) are consistently "cooked" (built, tested, and deployed) with precision and efficiency.
+
+### By learning GitHub Actions and CI/CD, you're essentially learning how to set up and manage your high-tech kitchen in the software world, allowing you to serve "dishes" faster, with higher quality, and with fewer "kitchen mishaps" (bugs and deployment issues).
+
+## Prerequisites or Requirements
+
+### 1. Basic Knowledge of Git and GitHub
+
+- Understand version control concepts
+
+- Be familiar with common Git commands: clone, commit, push, pull
+
+- Have a GitHub account and know how to manage repositories
+
+### 2. Understanding of Basic Programming Concepts
+
+- Know core programming fundamentals (JavaScript preferred)
+
+- Have a basic idea of how web applications work
+
+### 3. Familiarity with Node.js and npm
+
+- Know how to install and use Node.js
+
+- Understand how to use npm for managing project dependencies
+
+### 4. Text Editor or IDE
+
+- A tool like Visual Studio Code, Atom, Sublime Text, or any editor of your choice for writing and editing code
+
+### 5. Local Development Environment
+
+- Node.js and npm installed on your computer
+
+- Access to the command line or terminal (e.g., Bash, PowerShell)
+
+### 6. Internet Connection
+
+- A stable connection to access GitHub and other resources or documentation online
+
+### 7. Basic Understanding of CI/CD Concepts (Optional but Helpful)
+
+- General awareness of Continuous Integration and Continuous Deployment concepts
+
+- This can be part of the learning in the course, but prior knowledge is beneficial
+
+## Lesson 1: Understanding Continuous Integration and Continuous Deployment
+
+### Objectives:
+
+- Define CI/CD and understand its benefits
+
+- Get familiar with the CI/CD pipeline
+
+
+# Lesson Details
+## 1. Definition and Benefits of CI/CD:
+
+### Continuous Integration (CI) is the practice of merging all developers' working copies to a shared mainline several times a day.
+
+### Continuous Deployment (CD) is the process of releasing software changes to production automatically and reliably.
+
+## Benefits:
+
+- Faster release rate
+
+- Improved developer productivity
+
+- Better code quality
+
+- Enhanced customer satisfaction
+
+## 2. Overview of the CI/CD Pipeline
+
+### CI Pipeline typically includes steps like version control, code integration, automated testing, and building the application.
+
+### CD Pipeline involves steps like deploying the application to a staging or production environment, and post-deployment monitoring.
+
+### Tools: Version control systems (e.g., Git), CI/CD platforms (e.g., GitHub Actions), testing frameworks, and deployment tools.
+
+## Lesson 2: Introduction to GitHub Actions
+
+## Objectives:
+
+- Understand what GitHub Actions is
+
+- Learn key concepts and terminology
+
+## Lesson Details:
+
+### GitHub Actions: A CI/CD platform integrated into GitHub that automates the build, test, and deployment pipelines of your software directly within your GitHub repository
+
+### Documentation Reference: Explore the GitHub Actions documentation for in-depth understanding
+
+## Key Concepts and Terminology
+
+### 1. Workflow
+
+- A customizable automated process made of one or more jobs
+
+- Defined in a YAML file in your GitHub repo
+
+- Example: A workflow that builds and deploys your Node.js app whenever code is pushed
+
+- Docs: GitHub Workflows guide
+
+### 2. Event
+
+- An activity that triggers the workflow (like push, pull request, or scheduled time)
+
+- Example: On every push, your test workflow runs
+
+- Docs: Events that trigger workflows
+
+### 3. Job
+
+- A collection of steps executed on the same runner
+
+- Jobs can run one after the other or in parallel
+
+- Example: A job that installs dependencies and runs unit tests
+
+- Docs: Jobs documentation
+
+### 4. Step
+
+- A single task like running a command or an action
+
+- Example: A step to run npm install
+
+- Docs: Steps guide in GitHub Docs
+
+### 5. Action
+
+- A reusable block of code in steps—built-in or community-made
+
+- Example: actions/checkout to clone your repo
+
+- Docs: Creating and using GitHub Actions
+
+### 6. Runner
+
+- The server that runs workflows when they're triggered
+
+- Can be GitHub-hosted or self-hosted
+
+- Example: Ubuntu runner hosted by GitHub
+
+- Docs: GitHub Runners page
+
+
+## Additional Resources
+
+- GitHub Learning Lab – Interactive courses
+
+- GitHub Actions Quickstart – Hands-on intro
+
+- Community Forums – Ask questions, find support
+
+
+# Project Setup Instructions
+
+## Step 1. Initialize a GitHub Repository
+
+- Create a new repository on GitHub
+
+- Clone it to your local machine
+
+![image](screenshot/1.PNG)
+
+## Step 2. Creating a Simple Node.js Application
+
+### Run npm init to initialize your Node.js project. In the project folder. run:
+
+`npm init -y`
+
+### This creates a package.jason file with default setting
+
+![image](screenshot/2.PNG)
+
+##  Building a simple server using Express.js to serve a static web page
+
+### We need Express for our server:
+
+`npm install express`
+
+![image](screenshot/3.PNG)
+
+
+## Step 3. Adding our code to the repo and push it back to GitHub
+
+```
+// Example: index.js
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {"\n     res.send('Hello World!');\n   "});
+
+app.listen(port, () => {
+  console.log(`App listening at http://localhost:${port}`);
+});
+
 ```
 
-### 2. Run locally
-```bash
-npm start
-```
+### We Create a file named index.js in the root of our project and paste the code about inside `index.js`
 
-### 3. Run tests
-```bash
-npm test
-```
+## Step 4: Running the App locally 
 
-### 4. Lint your code
-```bash
-npm run lint
-```
+### First we start the server using the command: `npm start` then access the App on `http://localhost:3000`
 
----
+### Start the server
 
-## GitHub Actions Workflow
-- Workflow file: `.github/workflows/node.js.yml`
-- Auto runs on `push` or `pull_request` to `main`
+![image](screenshot/4.PNG)
 
----
+### Accessing our Application via `http://localhost:3000` locally 
 
-## Deployment
-You can deploy to:
-- **Heroku** (see workflow comments for setup)
-- **AWS** or **Vercel** (manual steps required)
+![image](screenshot/5.PNG)
 
-## Deploying to AWS:
 
-✅ Prerequisites
-AWS account
+## Step 5: Writing our First GitHub Action Workflow
 
-EC2 key pair (.pem file)
+### 1. Creating a .github/workflows directory in our repository
 
-Node.js app (your zipped project)
+`mkdir -p .github/workflows`
 
-Security group with ports 22 (SSH) and 3000 (Node.js app) open
+![image](screenshot/6.PNG)
 
-1. Launch an EC2 Instance
-Go to AWS EC2 Console → Launch instance
+### 2. Adding a workflow file (e.g., node.js.yml). Open any code editor and paste the script into a new file named js.yml and save
 
-Choose Amazon Linux 2 or Ubuntu
+`.github/workflows/node.js.yml`
 
-Select an instance type (e.g., t2.micro)
+![image](screenshot/7.PNG)
 
-Choose or create a key pair
-
-Configure security group:
-
-Allow SSH (22) from your IP
-
-Allow Custom TCP (3000) from your IP or Anywhere (for testing)
-
-Launch the instance
-
-2. Connect to the Instance via SSH
+### Step 6: Commiting and pushing the file to GitHub:
 
 ```
-chmod 400 your-key.pem
-ssh -i your-key.pem ec2-user@your-ec2-public-ip     # for Amazon Linux
-# OR
-ssh -i your-key.pem ubuntu@your-ec2-public-ip       # for Ubuntu
+git add .
+git commit -m "Add CI workflow for Node.js app"
+git push origin main
 
 ```
 
-3. Install Node.js and Git
+### Step 7: GO to the Actions tab in our GitHub repo and watch the magic happen
 
-```
-sudo apt update -y
-sudo apt install -y nodejs npm git unzip
+![image](screenshot/9.PNG)
 
-```
+![image](screenshot/10.PNG)
 
-4. Upload Your App
-Option A: Upload ZIP via SCP
-From your local terminal:
+### Deploying to AWS EC2 instance
 
-`scp -i your-key.pem node-app-ci-cd-updated.zip ec2-user@your-ec2-public-ip:~`
+![image](screenshot/11.PNG)
 
-Option B: Clone from GitHub
+### Security Group setup
 
-```
-git clone https://github.com/YOUR_USERNAME/node-app-ci-cd.git
-cd node-app-ci-cd
+![image](screenshot/12.PNG)
 
-```
+### Connecting to instance via shh
 
-5. Setup and Run App
+![image](screenshot/13.PNG)
 
-```
-unzip node-app-ci-cd-updated.zip
-cd node-app-ci-cd
-npm install
-npm start
+### Cloning github repositoory into ec2 instance server
 
-```
+![image](screenshot/14.PNG)
 
-6. Access the App
-Go to:
+### Verify cloning and files
 
-`http://<EC2-PUBLIC-IP>:3000`
+![image](screenshot/15.PNG)
 
-You should see:
 
-“Welcome to My Node.js App!”
+## Seting up and Running Node js Application on EC2 instance
 
-✅ Optional: Keep App Running with pm2
-Install pm2 globally:
+![image](screenshot/16.PNG)
 
-```
-sudo npm install -g pm2
-pm2 start server.js
-pm2 startup
-pm2 save
+
+
+
+
+
+
+
 
 ```
 
-✅ Optional: Use NGINX as Reverse Proxy
-To serve the app via http://<your-ec2-ip> (port 80):
+# Example: .github/workflows/node.js.yml
 
-1. Install NGINX:
+# Name of the workflow
+name: Node.js CI
 
-`sudo apt install nginx`  # or sudo yum install nginx
+# Specifies when the workflow should be triggered
+on:
+# Triggers the workflow on 'push' events to the 'main' branch
+push:
+    branches: [ main ]
+# Also triggers the workflow on 'pull_request' events targeting the 'main' branch
+pull_request:
+    branches: [ main ]
 
-2. Configure:
+# Defines the jobs that the workflow will execute
+jobs:
+# Job identifier, can be any name (here it's 'build')
+build:
+    # Specifies the type of virtual host environment (runner) to use
+    runs-on: ubuntu-latest
 
-`sudo nano /etc/nginx/sites-available/default  # or /etc/nginx/nginx.conf`
+    # Strategy for running the jobs - this section is useful for testing across multiple environments
+    strategy:
+    # A matrix build strategy to test against multiple versions of Node.js
+    matrix:
+        node-version: [14.x, 16.x]
 
-Replace or add: 
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - # Checks-out your repository under $GITHUB_WORKSPACE, so the job can access it
+    uses: actions/checkout@v2
+
+    - # Sets up the specified version of Node.js
+    name: Use Node.js ${{" matrix.node-version "}}
+    uses: actions/setup-node@v1
+    with:
+        node-version: ${{" matrix.node-version "}}
+
+    - # Installs node modules as specified in the project's package-lock.json
+    run: npm ci
+
+    - # This command will only run if a build script is defined in the package.json
+    run: npm run build --if-present
+
+    - # Runs tests as defined in the project's package.json
+    run: npm test
 
 ```
-server {
-    listen 80;
-    server_name _;
 
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
+## Explanation:
 
-```
+### 1. `name`: This simply names your workflow. It's what appears on GitHub when the workflow is running.
 
-3. Restart NGINX:
+### 2. `on`: This section defines when the workflow is triggered. Here, it's set to activate on push and pull request events to the main branch.
 
-`sudo systemctl restart nginx`
+### 3. `jobs`: Jobs are a set of steps that execute on the same runner. In this example, there's one job named build.
 
-Done.
+### 4. `runs-on`: Defines the type of machine to run the job on. Here, it's using the latest Ubuntu virtual machine.
 
-### You’ve manually deployed your Node.js app to AWS EC2.
+### 5. `strategy`.matrix: This allows you to run the job on multiple versions of Node.js, ensuring compatibility.
+
+### 6. `steps`: A sequence of tasks executed as part of the job.
+
+- actions/checkout@v2: Checks out your repository under $GITHUB_WORKSPACE.
+
+- actions/setup-node@v1: Sets up the Node.js environment.
+
+- npm ci: Installs dependencies defined in package-lock.json.
+
+- npm run build --if-present: Runs the build script from package.json if it's present.
+
+- npm test: Runs tests specified in package.json.
+
+### This workflow is a basic example for a Node.js project, demonstrating how to automate testing across different Node.js versions and ensuring that your code integrates and works as expected in a clean environment.
 
 
-yyy
+## Testing and Deployment:
+
+- Add automated tests for your application.
+
+- Create a workflow for deployment (e.g., to a cloud service like Heroku or AWS).
+
+## Experiment and Learn:
+
+- Modify workflows to see how changes affect the CI/CD process.
+
+- Try adding different types of tests (unit tests, integration tests).
